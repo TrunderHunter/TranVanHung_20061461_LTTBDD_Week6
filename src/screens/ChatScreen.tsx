@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -16,32 +16,46 @@ import {
 import ItemComponent from "../components/ItemComponent";
 
 const ChatScreen = () => {
-  const chatItems = [
-    {
-      id: "1",
-      title: "Ca nấu lẩu, nấu mì mini...",
-      shop: "Shop Devang",
-      image: "https://picsum.photos/200/300",
-    },
-    {
-      id: "2",
-      title: "Sản phẩm ăn vặt LTD Food",
-      shop: "LTD Food",
-      image: "https://picsum.photos/200/300",
-    },
-    {
-      id: "3",
-      title: "Đồ chơi xe tải",
-      shop: "Shop",
-      image: "https://picsum.photos/200/300",
-    },
-  ];
+  const [chatItems, setChatItems] = useState([]);
+  var myHeaders = new Headers();
+  myHeaders.append("X-API-KEY", "ecae079c53528a61815a6bf788f8c023107c8468");
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    q: "apple inc",
+    page: 2,
+  });
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow" as RequestRedirect,
+  };
+
+  const fetchAPI = async () => {
+    try {
+      const response = await fetch(
+        "https://google.serper.dev/search",
+        requestOptions
+      );
+      const result = await response.json();
+      setChatItems(result.organic);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
 
   interface ChatItem {
     id: string;
     title: string;
-    shop: string;
-    image: string;
+    link: string;
+    snippet: string;
+    position: string;
   }
 
   const renderItem = ({ item }: { item: ChatItem }) => (
@@ -68,7 +82,7 @@ const ChatScreen = () => {
       <FlatList
         data={chatItems}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.position}
         contentContainerStyle={styles.chatList}
       />
 

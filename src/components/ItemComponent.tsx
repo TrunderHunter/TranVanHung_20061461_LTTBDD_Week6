@@ -4,21 +4,26 @@ import React from "react";
 interface ChatItem {
   id: string;
   title: string;
-  shop: string;
-  image: string;
+  link: string;
+  snippet: string;
 }
 
 const ItemComponent = ({ item }: { item: ChatItem }) => {
   return (
     <View style={styles.chatItem}>
-      <Image source={{ uri: item.image }} style={styles.productImage} />
+      <Image
+        source={{ uri: "https://picsum.photos/200/300" }}
+        style={styles.productImage}
+      />
       <View style={styles.productInfo}>
         <Text numberOfLines={1} style={styles.productTitle}>
           {item.title}
         </Text>
-        <Text style={styles.shopName}>
-          Shop <Text style={styles.shopHighlight}>{item.shop}</Text>
+        <Text numberOfLines={1} style={styles.shopHighlight}>
+          {item.snippet}
         </Text>
+        <View style={{ height: 10 }} />
+        <Text style={styles.link}>{item.link}</Text>
       </View>
       <TouchableOpacity style={styles.chatButton}>
         <Text style={styles.chatButtonText}>Chat</Text>
@@ -62,8 +67,11 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   shopHighlight: {
-    color: "#FF0000",
-    fontWeight: "bold",
+    fontSize: 14,
+  },
+  link: {
+    color: "#03A9F4",
+    fontSize: 13,
   },
   chatButton: {
     backgroundColor: "#F44336",
