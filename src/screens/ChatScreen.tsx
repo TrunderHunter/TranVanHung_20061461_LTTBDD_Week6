@@ -7,7 +7,12 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons"; // For icons (can also use react-native-vector-icons)
+import {
+  Ionicons,
+  MaterialIcons,
+  Feather,
+  AntDesign,
+} from "@expo/vector-icons"; // For icons (can also use react-native-vector-icons)
 import ItemComponent from "../components/ItemComponent";
 
 const ChatScreen = () => {
@@ -70,13 +75,13 @@ const ChatScreen = () => {
       {/* Bottom Navigation Bar */}
       <View style={styles.bottomNavBar}>
         <TouchableOpacity style={styles.navButton}>
+          <Feather name="menu" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton}>
           <Ionicons name="home-outline" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.navButton}>
-          <Ionicons name="chatbubble-outline" size={24} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navButton}>
-          <Ionicons name="person-outline" size={24} color="black" />
+          <AntDesign name="back" size={24} color="black" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
