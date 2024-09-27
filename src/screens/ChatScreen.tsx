@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   FlatList,
   StyleSheet,
@@ -53,6 +52,13 @@ const ChatScreen = () => {
         <MaterialIcons name="shopping-cart" size={24} color="white" />
       </View>
 
+      {/* Chat title */}
+      <View style={styles.chatTitle}>
+        <Text style={styles.chatTitleText}>
+          Bạn có thắc mắc với sản phẩm vừa xem đừng ngại chát với shop!
+        </Text>
+      </View>
+
       {/* Chat List */}
       <FlatList
         data={chatItems}
@@ -80,6 +86,7 @@ const ChatScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 24,
     backgroundColor: "#FFFFFF",
   },
   navBar: {
@@ -93,6 +100,13 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  chatTitle: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  chatTitleText: {
+    fontSize: 16,
   },
   chatList: {
     paddingHorizontal: 10,
